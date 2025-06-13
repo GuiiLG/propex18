@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>CivilCrono IA - Cronogramas Inteligentes para Engenharia Civil</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-hard-hat"></i>
+                CivilCrono IA
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#criar">Criar Cronograma</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Cronogramas de Obra com IA</h1>
+                <p class="subtitle">Transforme sua planilha ORSE em cronogramas executivos detalhados usando inteligência artificial especializada em engenharia civil</p>
+                <a href="#criar" class="cta-button">
+                    <i class="fas fa-rocket" ></i>
+                    Criar Cronograma Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="recursos" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que usar CivilCrono IA?</h2>
+                <p>Otimize o planejamento das suas obras com tecnologia de ponta e inteligência artificial especializada</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3>IA Especializada</h3>
+                    <p>Nossa IA foi treinada especificamente para engenharia civil, entendendo sequências construtivas e dependências entre atividades de forma inteligente.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-excel feature-icon"></i>
+                    <h3>Integração ORSE</h3>
+                    <p>Importe diretamente sua planilha orçamentária ORSE e transforme automaticamente em cronograma executivo otimizado e detalhado.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-alt feature-icon"></i>
+                    <h3>Sequenciamento Inteligente</h3>
+                    <p>Algoritmos avançados que respeitam precedências construtivas e otimizam o uso de recursos, mão de obra e equipamentos.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-gantt feature-icon"></i>
+                    <h3>Dashboard Interativo</h3>
+                    <p>Visualize o progresso da obra em tempo real com dashboards interativos e métricas detalhadas de desempenho.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tools feature-icon"></i>
+                    <h3>Normas Técnicas</h3>
+                    <p>Cronogramas que seguem rigorosamente as melhores práticas da engenharia civil e normas técnicas da ABNT.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt feature-icon"></i>
+                    <h3>Atualizações Dinâmicas</h3>
+                    <p>Ajuste automaticamente prazos e sequências quando houver mudanças no escopo, mantendo o cronograma sempre atualizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="criar" class="cronograma-form">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: white;">Criar Cronograma da Obra</h2>
+                <p style="color: whitesmoke;">Preencha os dados abaixo e nossa IA criará um cronograma executivo personalizado</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="cronogramaForm">
+                    <div class="form-group">
+                        <label for="nomeObra">
+                            <i class="fas fa-building"></i> Nome da Obra
+                        </label>
+                        <input type="text" id="nomeObra" name="nomeObra" placeholder="Ex: Construção de Casa Popular, Edifício Residencial, Reforma de Escola..." required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dataInicio">
+                                <i class="fas fa-calendar-plus"></i> Data de Início
+                            </label>
+                            <input type="date" id="dataInicio" name="dataInicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="duracao">
+                                <i class="fas fa-clock"></i> Duração Total Estimada
+                            </label>
+                            <div class="duration-input">
+                                <input type="number" id="duracao" name="duracao" placeholder="120" min="1" max="2000" required>
+                                <div class="duration-unit">dias</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="planilhaORSE">
+                            <i class="fas fa-file-upload"></i> Planilha do ORSE
+                        </label>
+                        <div class="file-upload">
+                            <input type="file" id="planilhaORSE" name="planilhaORSE" accept=".xlsx,.xls,.csv,.pdf,.jpg,.jpeg,.png" required>
+                            <div class="file-upload-label" id="fileLabel">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div>
+                                    <div><strong>Clique para selecionar a planilha ORSE</strong></div>
+                                    <div class="file-info">Suporte: Excel (.xlsx, .xls), CSV, PDF ou imagem</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="file-info">
+                            A planilha deve conter: código do serviço, descrição, unidade, quantidade e preço unitário
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="informacoesAdicionais">
+                            <i class="fas fa-info-circle"></i> Informações Adicionais (Opcional)
+                        </label>
+                        <textarea id="informacoesAdicionais" name="informacoesAdicionais" rows="4" placeholder="Descreva condições especiais da obra: restrições de acesso, equipamentos disponíveis, tamanho da equipe, particularidades do terreno, condições climáticas, fornecedores preferenciais, etc..."></textarea>
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Analisando ORSE e gerando cronograma inteligente...</div>
+                    </div>
+
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Cronograma gerado com sucesso! Em breve você será redirecionado para o dashboard.
+                    </div>
+
+                    <button type="submit" class="generate-btn" id="generateBtn">
+                        <i class="fas fa-cogs"></i>
+                        Gerar Cronograma da Obra
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <i class="fas fa-copyright"></i>
+                2025 CivilCrono IA. Todos os direitos reservados. | Especializado em Engenharia Civil
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js">
+        
+    </script>
+</body>
+</html>
