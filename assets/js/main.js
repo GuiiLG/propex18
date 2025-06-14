@@ -85,3 +85,34 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Cole a URL que o Pipedream te deu aqui
+const apiUrl = "https://eo8abjs7tdfkhjk.m.pipedream.net/";
+
+// Função para buscar os dados da API
+async function buscarMensagem() {
+  try {
+    const response = await fetch(apiUrl);
+
+    // Verifica se a requisição foi bem-sucedida
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.statusText}`);
+    }
+
+    // Converte a resposta para JSON
+    const data = await response.json();
+
+    // Agora você pode usar os dados!
+    console.log(data); // Vai mostrar no console: { ola: "olá mundo" }
+    console.log(data.ola); // Vai mostrar no console: "olá mundo"
+
+    
+
+  } catch (error) {
+    console.error("Falha ao buscar dados da API:", error);
+  }
+}
+
+// Chama a função para executar o teste
+buscarMensagem();
+  
+
