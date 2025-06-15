@@ -72,13 +72,13 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
     loading.classList.add('active');
     generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
 
-        // <<< É ESTA PARTE QUE ENVIA A REQUISIÇÃO >>>
+
     try {
-        const apiUrl = "https://eo8abjs7tdfkhjk.m.pipedream.net/"; // Sua URL do Pipedream
+        const apiUrl = "https://eo7dmx7jybopor6.m.pipedream.net";
 
         const response = await fetch(apiUrl, {
             method: 'POST',
-            body: formData, // O corpo da requisição são os dados do seu formulário
+            body: formData,
         });
 
         const result = await response.json();
@@ -86,26 +86,24 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
         if (!response.ok) {
             throw new Error(result.message || 'Ocorreu um erro no servidor.');
         }
+        console.log(result)
         
-        // Se chegou aqui, deu tudo certo!
-        successMessage.textContent = result.message; // Mostra a mensagem de sucesso vinda do Pipedream
+        // Lógica de sucesso está AQUI, no lugar certo.
+        successMessage.textContent = result.message; 
         successMessage.classList.add('active');
-        e.target.reset(); // Limpa o formulário
-        // Reseta o label do arquivo para o estado inicial
+        e.target.reset(); 
         fileLabel.innerHTML = originalFileLabel;
         fileLabel.classList.remove('has-file');
 
     } catch (error) {
-        // Se deu algum erro na comunicação ou no Pipedream
         console.error("Erro ao enviar formulário:", error);
         alert(`Falha ao gerar cronograma: ${error.message}`);
     } finally {
-        // Este bloco executa sempre, dando certo ou errado
-        // Esconde o spinner e reativa o botão
         generateBtn.disabled = false;
         loading.classList.remove('active');
         generateBtn.innerHTML = 'CRIAR CRONOGRAMA AGORA';
     }
+
 });
 
 // Header scroll effect
