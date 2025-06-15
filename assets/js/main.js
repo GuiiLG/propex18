@@ -72,7 +72,40 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
     loading.classList.add('active');
     generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
 
+        // <<< É ESTA PARTE QUE ENVIA A REQUISIÇÃO >>>
+    try {
+        const apiUrl = "https://eo8abjs7tdfkhjk.m.pipedream.net/"; // Sua URL do Pipedream
 
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            body: formData, // O corpo da requisição são os dados do seu formulário
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || 'Ocorreu um erro no servidor.');
+        }
+        
+        // Se chegou aqui, deu tudo certo!
+        successMessage.textContent = result.message; // Mostra a mensagem de sucesso vinda do Pipedream
+        successMessage.classList.add('active');
+        e.target.reset(); // Limpa o formulário
+        // Reseta o label do arquivo para o estado inicial
+        fileLabel.innerHTML = originalFileLabel;
+        fileLabel.classList.remove('has-file');
+
+    } catch (error) {
+        // Se deu algum erro na comunicação ou no Pipedream
+        console.error("Erro ao enviar formulário:", error);
+        alert(`Falha ao gerar cronograma: ${error.message}`);
+    } finally {
+        // Este bloco executa sempre, dando certo ou errado
+        // Esconde o spinner e reativa o botão
+        generateBtn.disabled = false;
+        loading.classList.remove('active');
+        generateBtn.innerHTML = 'CRIAR CRONOGRAMA AGORA';
+    }
 });
 
 // Header scroll effect
@@ -85,34 +118,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Cole a URL que o Pipedream te deu aqui
-const apiUrl = "https://eo8abjs7tdfkhjk.m.pipedream.net/";
 
-// Função para buscar os dados da API
-async function buscarMensagem() {
-  try {
-    const response = await fetch(apiUrl);
-
-    // Verifica se a requisição foi bem-sucedida
-    if (!response.ok) {
-      throw new Error(`Erro na requisição: ${response.statusText}`);
-    }
-
-    // Converte a resposta para JSON
-    const data = await response.json();
-
-    // Agora você pode usar os dados!
-    console.log(data); // Vai mostrar no console: { ola: "olá mundo" }
-    console.log(data.ola); // Vai mostrar no console: "olá mundo"
-
-    
-
-  } catch (error) {
-    console.error("Falha ao buscar dados da API:", error);
-  }
-}
-
-// Chama a função para executar o teste
-buscarMensagem();
   
 
