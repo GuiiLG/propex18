@@ -75,9 +75,14 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
 
     try {
         const apiUrl = "https://eo7dmx7jybopor6.m.pipedream.net";
+        const apiToken = "C1v1lCr0n0-pr0j3t0-S3cr3t0-9w8x7y6z";
+        const headers = new Headers();
+
+        headers.append('Authorization', `Bearer ${apiToken}`);
 
         const response = await fetch(apiUrl, {
             method: 'POST',
+            headers: headers,
             body: formData,
         });
 
