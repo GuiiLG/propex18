@@ -15,28 +15,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// File upload handling
-const fileInput = document.getElementById('planilhaORSE');
-const fileLabel = document.getElementById('fileLabel');
-const originalFileLabel = fileLabel.innerHTML;
+// Função para lidar com o upload de arquivos
+function handleFileUpload(inputId, labelId, statusId) {
+    const fileInput = document.getElementById(inputId);
+    const fileLabel = document.getElementById(labelId);
+    const fileStatus = document.getElementById(statusId);
 
-fileInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        const fileSize = (file.size / 1024 / 1024).toFixed(2); // Size in MB
-        fileLabel.innerHTML = `
-            <i class="fas fa-file-check file-upload-icon"></i>
-            <div>
-                <div><strong>${file.name}</strong></div>
-                <div class="file-info">Tamanho: ${fileSize} MB</div>
-            </div>
-        `;
-        fileLabel.classList.add('has-file');
-    } else {
-        fileLabel.innerHTML = originalFileLabel;
-        fileLabel.classList.remove('has-file');
-    }
-});
+    const originalFileLabel = fileLabel.innerHTML;
+
+    fileInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const fileSize = (file.size / 1024 / 1024).toFixed(2); // Tamanho em MB
+            fileLabel.innerHTML = `
+                <i class="fas fa-file-check file-upload-icon"></i>
+                <div>
+                    <div><strong>${file.name}</strong></div>
+                    <div class="file-info">Tamanho: ${fileSize} MB</div>
+                </div>
+            `;
+            fileLabel.classList.add('has-file');
+            fileStatus.textContent = 'Arquivo enviado com sucesso!';
+            fileStatus.classList.add('has-file');
+        } else {
+            fileLabel.innerHTML = originalFileLabel;
+            fileLabel.classList.remove('has-file');
+            fileStatus.textContent = 'Nenhum arquivo enviado';
+            fileStatus.classList.remove('has-file');
+        }
+    });
+}
+
+// Aplicar a função para todos os inputs de arquivo
+handleFileUpload('orcamento', 'fileLabel', 'statusORSE');
+handleFileUpload('memorialDescritivo', 'fileLabelMemorial', 'statusMemorial');
+handleFileUpload('especificacaoTecnica', 'fileLabelEspecificacao', 'statusEspecificacao');
+handleFileUpload('pes', 'fileLabelPES', 'statusPES');
 
 // Form submission
 document.getElementById('cronogramaForm').addEventListener('submit', async function(e) {
@@ -51,21 +65,39 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
     const nomeObra = document.getElementById('nomeObra').value;
     const dataInicio = document.getElementById('dataInicio').value;
     const duracao = document.getElementById('duracao').value;
-    const planilhaORSE = document.getElementById('planilhaORSE').files[0];
-    const informacoesAdicionais = document.getElementById('informacoesAdicionais').value;
+    const orcamento = document.getElementById('orcamento').files[0];
+    const infraestrutura = Array.from(document.querySelectorAll('input[name="infraestrutura"]:checked'))
+        .map(checkbox => checkbox.value);
+    const topografia = document.querySelector('input[name="topografia"]:checked')?.value;
+    const memorialDescritivo = document.getElementById('memorialDescritivo').files[0];
+    const pes = document.getElementById('pes').files[0];
+    const especificacaoTecnica = document.getElementById('especificacaoTecnica').files[0];
 
-    // Validate required fields
-    if (!nomeObra || !dataInicio || !duracao || !planilhaORSE) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
-    }
+    // // Validate required fields
+    // if (!nomeObra || !dataInicio || !duracao || !orcamento || memorialDescritivo || !pes || !especificacaoTecnica) {
+    //     alert('Por favor, preencha todos os campos obrigatórios.');
+    //     return;
+    // }
 
     // Prepare form data
     formData.append('nomeObra', nomeObra);
     formData.append('dataInicio', dataInicio);
     formData.append('duracao', duracao);
-    formData.append('planilhaORSE', planilhaORSE);
-    formData.append('informacoesAdicionais', informacoesAdicionais);
+    formData.append('orçamento', orcamento);
+    formData.append('topografia', topografia);
+    formData.append('infraestrutura', infraestrutura);
+    formData.append('especificacaoTecnica', especificacaoTecnica)
+    formData.append('pes', pes)
+    formData.append('memorialDescritivo', memorialDescritivo)
+
+    console.log('Memorial Descritivo:', memorialDescritivo);
+    console.log('PES:', pes);
+    console.log('Especificação Técnica:', especificacaoTecnica);
+    
+    console.log('Dados do FormData:');
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+    }
 
     // Show loading state
     generateBtn.disabled = true;
@@ -93,12 +125,16 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
         }
         console.log(result)
         
-        // Lógica de sucesso está AQUI, no lugar certo.
-        successMessage.textContent = result.message; 
-        successMessage.classList.add('active');
-        e.target.reset(); 
-        fileLabel.innerHTML = originalFileLabel;
-        fileLabel.classList.remove('has-file');
+        // // Lógica de sucesso está AQUI, no lugar certo.
+        // successMessage.textContent = result.message; 
+        // successMessage.classList.add('active');
+        // e.target.reset(); 
+        // fileLabel.innerHTML = originalFileLabel;
+        // fileLabel.classList.remove('has-file');        // Salvar os dados no localStorage para o dashboard
+        localStorage.setItem('dashboardData', JSON.stringify(result));
+
+        // Redirecionar para o dashboard.html
+        window.location.href = 'dashboard.html';
 
     } catch (error) {
         console.error("Erro ao enviar formulário:", error);
@@ -122,5 +158,5 @@ window.addEventListener('scroll', function() {
 });
 
 
-  
+
 

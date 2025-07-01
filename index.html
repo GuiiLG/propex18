@@ -90,23 +90,32 @@
             
             <div class="form-container">
                 <form id="cronogramaForm">
+                    <!-- Dados Básicos da Obra -->
+                    <div class="form-section-title">
+                        <i class="fas fa-building"></i>
+                        Dados Básicos da Obra
+                    </div>
+                    
                     <div class="form-group">
                         <label for="nomeObra">
-                            <i class="fas fa-building"></i> Nome da Obra
+                            <i class="fas fa-building"></i>
+                            Nome da Obra
                         </label>
                         <input type="text" id="nomeObra" name="nomeObra" placeholder="Ex: Construção de Casa Popular, Edifício Residencial, Reforma de Escola..." required>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="dataInicio">
-                                <i class="fas fa-calendar-plus"></i> Data de Início
+                                <i class="fas fa-calendar-plus"></i>
+                                Data de Início
                             </label>
                             <input type="date" id="dataInicio" name="dataInicio" required>
                         </div>
                         <div class="form-group">
                             <label for="duracao">
-                                <i class="fas fa-clock"></i> Duração Total Estimada
+                                <i class="fas fa-clock"></i>
+                                Duração Total Estimada
                             </label>
                             <div class="duration-input">
                                 <input type="number" id="duracao" name="duracao" placeholder="120" min="1" max="2000" required>
@@ -114,31 +123,116 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="planilhaORSE">
-                            <i class="fas fa-file-upload"></i> Planilha do ORSE
+                            <i class="fas fa-file-upload"></i>
+                            Orçamento de Obra
                         </label>
                         <div class="file-upload">
-                            <input type="file" id="planilhaORSE" name="planilhaORSE" accept=".xlsx,.xls,.csv,.pdf,.jpg,.jpeg,.png" required>
+                            <input type="file" id="orcamento" name="orcamento" accept=".xlsx,.xls,.csv,.pdf,.jpg,.jpeg,.png" required>
                             <div class="file-upload-label" id="fileLabel">
                                 <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
                                 <div>
-                                    <div><strong>Clique para selecionar a planilha ORSE</strong></div>
+                                    <div><strong>Clique para selecionar o Orçamento de Obra</strong></div>
                                     <div class="file-info">Suporte: Excel (.xlsx, .xls), CSV, PDF ou imagem</div>
                                 </div>
                             </div>
                         </div>
                         <div class="file-info">
-                            A planilha deve conter: código do serviço, descrição, unidade, quantidade e preço unitário
+                            O orçamento deve conter: código do serviço, descrição, unidade, quantidade e preço unitário
                         </div>
                     </div>
 
+                    <!-- Características do Terreno -->
+                    <div class="form-section-title">
+                        <i class="fas fa-map"></i>
+                        Características do Terreno
+                    </div>
+                    
                     <div class="form-group">
-                        <label for="informacoesAdicionais">
-                            <i class="fas fa-info-circle"></i> Informações Adicionais (Opcional)
-                        </label>
-                        <textarea id="informacoesAdicionais" name="informacoesAdicionais" rows="4" placeholder="Descreva condições especiais da obra: restrições de acesso, equipamentos disponíveis, tamanho da equipe, particularidades do terreno, condições climáticas, fornecedores preferenciais, etc..."></textarea>
+                        <label>Topografia do Terreno:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="topografia_plano" name="topografia" value="plano">
+                                <label for="topografia_plano">Plano (Não requer terraplanagem significativa)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="topografia_aclive" name="topografia" value="aclive">
+                                <label for="topografia_aclive">Aclive (Requer corte de terra)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="topografia_declive" name="topografia" value="declive">
+                                <label for="topografia_declive">Declive (Requer aterro)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="topografia_irregular" name="topografia" value="irregular">
+                                <label for="topografia_irregular">Irregular (Requer corte e aterro)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Infraestrutura Existente no Local: (Marque todas as aplicáveis)</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="agua" name="infraestrutura" value="agua">
+                                <label for="agua">Acesso à rede de água potável</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="esgoto" name="infraestrutura" value="esgoto">
+                                <label for="esgoto">Acesso à rede de esgoto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="energia" name="infraestrutura" value="energia">
+                                <label for="energia">Acesso à rede de energia elétrica</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ruas" name="infraestrutura" value="ruas">
+                                <label for="ruas">Ruas de acesso pavimentadas</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">
+                        <i class="fas fa-file-alt"></i>
+                        Documentação Adicional
+                    </div>
+
+                    <div class="form-group upload-buttons">
+                        <div class="file-upload">
+                            <input type="file" id="memorialDescritivo" name="memorialDescritivo" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            <div class="file-upload-label" id="fileLabelMemorial">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div>
+                                    <div><strong>Memorial Descritivo</strong></div>
+                                    <div class="file-info">Suporte: PDF, DOC, Imagem</div>
+                                </div>
+                            </div>
+                            <div class="file-status" id="statusMemorial">Nenhum arquivo enviado</div>
+                        </div>
+                        <div class="file-upload">
+                            <input type="file" id="especificacaoTecnica" name="especificacaoTecnica" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            <div class="file-upload-label" id="fileLabelEspecificacao">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div>
+                                    <div><strong>Especificação Técnica</strong></div>
+                                    <div class="file-info">Suporte: PDF, DOC, Imagem</div>
+                                </div>
+                            </div>
+                            <div class="file-status" id="statusEspecificacao">Nenhum arquivo enviado</div>
+                        </div>
+                        <div class="file-upload">
+                            <input type="file" id="pes" name="pes" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            <div class="file-upload-label" id="fileLabelPES">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <div>
+                                    <div><strong>PES</strong></div>
+                                    <div class="file-info">Suporte: PDF, DOC, Imagem</div>
+                                </div>
+                            </div>
+                            <div class="file-status" id="statusPES">Nenhum arquivo enviado</div>
+                        </div>
                     </div>
 
                     <div class="loading" id="loading">
