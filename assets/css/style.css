@@ -539,41 +539,6 @@ nav {
     color: #007bff;
 }
 
-/* Upload Buttons */
-.upload-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.upload-buttons .file-upload {
-    flex: 1;
-    text-align: center;
-    border: 1px dashed #ccc;
-    padding: 15px;
-    border-radius: 8px;
-    transition: border-color 0.3s ease;
-}
-
-.upload-buttons .file-upload:hover {
-    border-color: #007bff;
-}
-
-.upload-buttons .file-upload-label {
-    cursor: pointer;
-}
-
-.upload-buttons .file-upload-icon {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 10px;
-}
-
-.upload-buttons .file-info {
-    font-size: 12px;
-    color: #666;
-}
 
 /* Duration Input */
 .duration-input {

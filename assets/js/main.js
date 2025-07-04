@@ -15,12 +15,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Função para lidar com o upload de arquivos
-function handleFileUpload(inputId, labelId, statusId) {
+function handleFileUpload(inputId, labelId) {
     const fileInput = document.getElementById(inputId);
     const fileLabel = document.getElementById(labelId);
-    const fileStatus = document.getElementById(statusId);
-
     const originalFileLabel = fileLabel.innerHTML;
 
     fileInput.addEventListener('change', function (e) {
@@ -35,22 +32,17 @@ function handleFileUpload(inputId, labelId, statusId) {
                 </div>
             `;
             fileLabel.classList.add('has-file');
-            fileStatus.textContent = 'Arquivo enviado com sucesso!';
-            fileStatus.classList.add('has-file');
         } else {
             fileLabel.innerHTML = originalFileLabel;
             fileLabel.classList.remove('has-file');
-            fileStatus.textContent = 'Nenhum arquivo enviado';
-            fileStatus.classList.remove('has-file');
         }
     });
 }
 
-// Aplicar a função para todos os inputs de arquivo
-handleFileUpload('orcamento', 'fileLabel', 'statusORSE');
-handleFileUpload('memorialDescritivo', 'fileLabelMemorial', 'statusMemorial');
-handleFileUpload('especificacaoTecnica', 'fileLabelEspecificacao', 'statusEspecificacao');
-handleFileUpload('pes', 'fileLabelPES', 'statusPES');
+// Aplicar a função para os inputs de arquivo
+handleFileUpload('orcamento', 'fileLabel'); // Para o orçamento
+handleFileUpload('fisico', 'fileLabelFisico'); // Para o físico-financeiro
+
 
 // Form submission
 document.getElementById('cronogramaForm').addEventListener('submit', async function(e) {
@@ -69,9 +61,7 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
     const infraestrutura = Array.from(document.querySelectorAll('input[name="infraestrutura"]:checked'))
         .map(checkbox => checkbox.value);
     const topografia = document.querySelector('input[name="topografia"]:checked')?.value;
-    const memorialDescritivo = document.getElementById('memorialDescritivo').files[0];
-    const pes = document.getElementById('pes').files[0];
-    const especificacaoTecnica = document.getElementById('especificacaoTecnica').files[0];
+    const fisico = document.getElementById("fisico").files[0]
 
     // // Validate required fields
     // if (!nomeObra || !dataInicio || !duracao || !orcamento || memorialDescritivo || !pes || !especificacaoTecnica) {
@@ -83,16 +73,10 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
     formData.append('nomeObra', nomeObra);
     formData.append('dataInicio', dataInicio);
     formData.append('duracao', duracao);
-    formData.append('orçamento', orcamento);
+    formData.append('orcamento', orcamento);
     formData.append('topografia', topografia);
     formData.append('infraestrutura', infraestrutura);
-    formData.append('especificacaoTecnica', especificacaoTecnica)
-    formData.append('pes', pes)
-    formData.append('memorialDescritivo', memorialDescritivo)
-
-    console.log('Memorial Descritivo:', memorialDescritivo);
-    console.log('PES:', pes);
-    console.log('Especificação Técnica:', especificacaoTecnica);
+    formData.append('fisico', fisico)
     
     console.log('Dados do FormData:');
     for (const [key, value] of formData.entries()) {
@@ -106,7 +90,7 @@ document.getElementById('cronogramaForm').addEventListener('submit', async funct
 
 
     try {
-        const apiUrl = "https://eo7dmx7jybopor6.m.pipedream.net";
+        const apiUrl = "https://eodljfp7j164gad.m.pipedream.net";
         const apiToken = "C1v1lCr0n0-pr0j3t0-S3cr3t0-9w8x7y6z";
         const headers = new Headers();
 
