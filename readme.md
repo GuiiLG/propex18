@@ -3,6 +3,8 @@
 This project is an **automation system** for creating construction schedules using **AI**.  
 It integrates various tools and services to generate detailed project timelines automatically through **OpenAI’s ChatGPT API**.
 
+**this project is still under development**
+
 ## Overview
 
 The goal of this project is to simplify the process of building and managing construction schedules by combining **automation workflows** and **AI text generation**.  
